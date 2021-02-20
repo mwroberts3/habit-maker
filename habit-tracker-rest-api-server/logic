@@ -1,0 +1,7 @@
+-when you load the app, it should get user information from the frontend
+    -user logs into front end...that info is passed to the backend and looked up in the database
+    -the backend finds the user in the database and passes back a token, which can be used by subsequent requests 
+
+-with the user info, it should then look up all associated habits with that user
+-when the app loads, habits from the backend should be sent to the frontend
+    -will need to add some sort of user validation

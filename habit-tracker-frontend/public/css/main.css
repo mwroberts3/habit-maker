@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  background: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; }
+
+form {
+  width: 225px;
+  margin: auto;
+  text-align: center; }
+  form label,
+  form input {
+    display: block;
+    width: 182px;
+    margin: auto; }
+  form label {
+    margin-top: 5px; }
+  form input {
+    padding: 3px 3px;
+    border: 1px solid #aaa;
+    border-radius: 5px; }
+
+.hidden {
+  display: none; }
+
+.top-margin-20px {
+  margin-top: 20px; }
+
+.light-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; }
+
+main {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px; }
+  main h1 {
+    text-align: center; }
+
+#habit-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.habit-card {
+  width: calc(50% - 10px);
+  margin: 2.5px;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 3px 3px #777; }
+  .habit-card .description {
+    font-weight: bold; }
+  .habit-card .active {
+    color: green; }
+  .habit-card .passive {
+    color: red; }
+
+#auth-error {
+  text-align: center;
+  font-weight: bold;
+  font-style: italic; }

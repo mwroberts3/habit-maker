@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="./public/css/main.css" />
+  </head>
+  <body>
+    <main id="login-main">
+      <h1>Habit Tracker</h1>
+      <div id="auth-error">&nbsp;</div>
+      <form id="login-signup-form" name="login">
+        <label for="email">email</label>
+        <input id="login-email" name="email" type="text" />
+        <label for="password">password</label>
+        <input id="login-pw" name="password" type="password" />
+        <label id="signup-confirm-pw" for="confirm-password" class="hidden"
+          >confirm password
+          <input name="confirmPassword" type="password" />
+        </label>
+        <button id="login-submit" class="light-btn">Login</button>
+        <button id="signup-submit" class="light-btn">Signup</button>
+      </form>
+      <input type="checkbox" />
+      <label for="remember-login">Remember Me</label>
+    </main>
+    <main id="after-auth-main" class="hidden">
+      <button id="new-habit-btn" class="light-btn">Add New Habit</button>
+      <section id="habit-form-overlay" class="top-margin-20px hidden">
+        <form id="new-habit-form">
+          <h3>Add New Habit</h3>
+          <label for="description">Short Description</label>
+          <input name="description" type="text" />
+          <h3>Update Style</h3>
+          <label for="active-update">active</label>
+          <input type="radio" name="updateStyle" value="active" />
+          <label for="passive-update">passive</label>
+          <input type="radio" name="updateStyle" value="passive" checked />
+          <label for="days">Days Goal</label>
+          <input name="daysGoal" type="number" />
+          <label for="skip-days"
+            >1 Skip Day per
+            <input name="skipPerDays" type="number" /> Day(s)</label
+          >
+          <button id="submit-new-habit" class="light-btn">Submit</button>
+        </form>
+      </section>
+      <section id="habit-list"></section>
+    </main>
+  </body>
+  <script src="loadHabits.js"></script>
+</html>
