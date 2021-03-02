@@ -40,6 +40,8 @@ exports.login = (req, res, next) => {
         error.statusCode = 422;
         throw error;
     };
+
+    console.log(req.body);
     
     User.findOne({ email: req.body.email })
     .then((user) => {
@@ -52,7 +54,7 @@ exports.login = (req, res, next) => {
             const token = jwt.sign({ 
                 email: user.email, userId: user._id.toString()
             }, 'qwepoiasdlkjzxcmnb', 
-            {expiresIn: '1hr'}
+            {expiresIn: req.body.rememberMe ? '36h' : '1h'}
             );
             req.userId = token.userId;
             res.status(200).json({token});
@@ -64,5 +66,5 @@ exports.login = (req, res, next) => {
           err.statusCode = 500;
         }
         next(err);
-      });
+    });
 };

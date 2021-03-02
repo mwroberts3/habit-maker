@@ -9,9 +9,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; }
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; }
 
 form {
+  position: relative;
   width: 225px;
   margin: auto;
   text-align: center; }
@@ -28,7 +29,7 @@ form {
     border-radius: 5px; }
 
 .hidden {
-  display: none; }
+  display: none !important; }
 
 .top-margin-20px {
   margin-top: 20px; }
@@ -40,14 +41,49 @@ form {
   background-color: #fff;
   border: 1px solid #aaa;
   border-radius: 5px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; }
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; }
 
-main {
+#login-main {
   margin-top: 40px;
   width: 100%;
   max-width: 1200px; }
-  main h1 {
+  #login-main h1 {
     text-align: center; }
+
+#store-session-checkbox {
+  position: absolute;
+  left: 20px;
+  margin-top: 12px;
+  width: 15px;
+  color: #aaa; }
+
+label[for="remember-login"] {
+  position: absolute;
+  left: 40px;
+  margin-top: 8px;
+  width: 140px;
+  text-align: left; }
+
+#after-auth-main {
+  width: 100%; }
+  #after-auth-main button {
+    margin: 5px 5px; }
+
+#top-options-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  #top-options-bar span {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px; }
+
+#habit-form-overlay {
+  height: calc(100vh - 38px);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 #habit-list {
   display: flex;
@@ -55,7 +91,9 @@ main {
   justify-content: center; }
 
 .habit-card {
+  position: relative;
   width: calc(50% - 10px);
+  min-width: 150px;
   margin: 2.5px;
   padding: 5px;
   background-color: #fff;
@@ -67,6 +105,23 @@ main {
     color: green; }
   .habit-card .passive {
     color: red; }
+
+.logged {
+  box-shadow: 0px 0px #777; }
+  .logged-active {
+    background: #85f085; }
+  .logged-passive {
+    background: #db6c6c;
+    color: white; }
+
+.delete-habit-btn {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  color: #a81818;
+  font-size: 12px; }
 
 #auth-error {
   text-align: center;

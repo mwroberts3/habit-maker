@@ -8,5 +8,11 @@ router.get('/', tokenCheck, habitController.loadHabits);
 
 router.post('/add-habit', tokenCheck, habitController.addNewHabit);
 
+router.post('/log-habit', tokenCheck, habitController.logHabit);
+
+router.post('/times-up', tokenCheck, habitController.timesUpLog);
+
+router.delete('/delete-habit', tokenCheck, habitController.deleteHabit);
+
 module.exports = router;
 

@@ -7,20 +7,16 @@ const habitSchema = new Schema(
         active: Boolean,
         passiveUpdate: Boolean,
         goal: Number,
-        streak: Number,
-        skipDays: {
-            option: Boolean,
-            streakUnlock: Number,
-            count: Number
-        },
+        daysLogged: Number,
+        daysLeft: Number,
+        createdAt: String, 
+        lastUpdated: String,
+        updatedToday: Boolean,
         creator: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true
         }
-    },
-    {
-        timestamps: true
     }
 );
 
