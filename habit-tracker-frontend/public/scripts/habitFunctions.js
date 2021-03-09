@@ -2,7 +2,7 @@ function loadHabits(token) {
     let currentDate = new Date(new Date().getTime());
     currentDate.setHours(0,0,0,0);
 
-    fetch('http://localhost:5050/habits', {
+    fetch(`http://${localIP ? localIP : 'localhost'}:5050/habits`, {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + token,
@@ -81,7 +81,7 @@ function logHabit(habitDescription) {
 
     // as of 2/26 both the createdAt property and lastUpdated property are dialed back to 12AM of the current day
 
-    fetch('http://localhost:5050/habits/log-habit', {
+    fetch(`http://${localIP ? localIP : 'localhost'}:5050/habits/log-habit`, {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + activeToken,
@@ -141,7 +141,7 @@ function timeCheck(habits, token) {
         } 
 
         if (minutes == 0) {
-            fetch('http://localhost:5050/habits/times-up', {
+            fetch(`http://${localIP ? localIP : 'localhost'}:5050/habits/times-up`, {
                 method: 'POST',
                 headers: {
                     Authorization: 'Bearer ' + token,
@@ -172,7 +172,7 @@ function updatedTodayCheck(habit) {
 }
 
 function deleteHabit(habitDesc, token) {
-    fetch('http://localhost:5050/habits/delete-habit', {
+    fetch(`http://${localIP ? localIP : 'localhost'}:5050/habits/delete-habit`, {
         method: 'DELETE',
         headers: {
             Authorization: 'Bearer ' + token,

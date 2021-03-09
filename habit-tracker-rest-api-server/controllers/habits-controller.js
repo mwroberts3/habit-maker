@@ -11,26 +11,43 @@ exports.loadHabits = async (req, res, next) => {
 
     for(let i = 0; i < habits.length; i++) {
         console.log(new Date(currentDate).getTime(), new Date(habits[i].lastUpdated).getTime());
+
+        console.log(new Date(currentDate), new Date(habits[i].lastUpdated))
+        
+        let diffTime = Math.abs(new Date(currentDate) - new Date(habits[i].lastUpdated))
+        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        console.log(diffDays);
+
         if (new Date(currentDate).getTime() > new Date(habits[i].lastUpdated).getTime()) {
             // if it's a passive hobby update days passed and streak automatically
             // ...need a way to count the number of days that have passed since the last update though
             // console.log(habits[i]);
             if (!habits[i].active) {
-                if (!habits[i].updatedToday) {
-                    habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { lastUpdated: new Date(currentDate), updatedToday: false, $inc : {streak: 1, daysLogged: 1,daysLeft: -1}}, {
+                if (habits[i].updatedToday) {
+                    habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { lastUpdated: new Date(currentDate), $inc : {daysLogged: diffDays - 1, daysLeft: -diffDays}}, {
                         new: true
                     })
-
+                } else {
+                    habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { lastUpdated: new Date(currentDate), $inc : { daysLogged: diffDays,daysLeft: -diffDays}}, {
+                        new: true
+                    })
                 }
             }
-    
-            // if it's a passive hobby update days passed and streak automatically
-            // ...need a way to count the number of days that have passed since the last update though
+
             if (habits[i].active) {
-                habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, {updatedToday: false}, {
+                habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { lastUpdated: new Date(currentDate), $inc : { daysLeft: -diffDays }}, {
                     new: true
                 })
             }
+            
+            habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { updatedToday: false }, {
+                new: true
+            })
+
+    
+            // if it's a passive hobby update days passed and streak automatically
+            // ...need a way to count the number of days that have passed since the last update though
         }
     }
 
@@ -102,7 +119,7 @@ exports.logHabit = async (req, res, next) => {
 
     habit.active ? habitType = {type: 'active', increment: 1} : habitType = {type: 'passive', increment: 0};
 
-    Habit.findOneAndUpdate({ creator: req.userId, description: req.body.habitDesc }, { updatedToday: true, lastUpdated: req.body.lastUpdated, $inc : { daysLogged: habitType.increment, daysLeft: -1 }}, {
+    Habit.findOneAndUpdate({ creator: req.userId, description: req.body.habitDesc }, { updatedToday: true, lastUpdated: req.body.lastUpdated, $inc : { daysLogged: habitType.increment}}, {
         new: true
     })
     .then((habit) => {
@@ -131,6 +148,8 @@ exports.logHabit = async (req, res, next) => {
 }
 
 exports.timesUpLog = async (req, res, next) => {
+    // active habits that aren't logged the previous day need to have a day subtracted from daysLeft
+
     let habits = Array.from(req.body);
     console.log(habits[0].description.toString());
 

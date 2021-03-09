@@ -29,7 +29,7 @@ app.use((error, req, res, next) => {
     res.status(status).json({ message: message, data: data });
 });
 
-mongoose.connect('mongodb+srv://mwroberts:mwr92089@cluster0.ko3ht.mongodb.net/habits?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ko3ht.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => {
         app.listen(5050);
     })

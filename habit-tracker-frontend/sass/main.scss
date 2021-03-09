@@ -99,6 +99,8 @@ label[for="remember-login"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 900px;
+  margin: auto;
 
   span {
     font-family: "Courier New", Courier, monospace;
@@ -125,6 +127,7 @@ label[for="remember-login"] {
   position: relative;
   width: calc(50% - 10px);
   min-width: 150px;
+  max-width: 300px;
   margin: 2.5px;
   padding: 5px;
   background-color: #fff;

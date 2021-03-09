@@ -1,3 +1,8 @@
+// check for localIP
+if (typeof localIP === 'undefined') {
+    localIP = null;
+};
+
 const login = document.getElementById('login'),
 loginEmail = document.getElementById('login-email'),
 loginPassword = document.getElementById('login-pw'),
@@ -41,7 +46,7 @@ signUpBtn.addEventListener('click', (e) => {
         rememberMeContainer.classList.add('hidden');
         signUpBtn.textContent = 'Confirm';
     } else {
-        fetch('http://localhost:5050/signup', {
+        fetch(`http://${localIP ? localIP : 'localhost'}:5050/signup`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,7 +79,7 @@ signUpBtn.addEventListener('click', (e) => {
 loginBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:5050/login', {
+    fetch(`http://${localIP ? localIP : 'localhost'}:5050/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -126,7 +131,7 @@ newHabitForm.addEventListener('submit', (e) => {
         formDataObj[key] = formData.get(key);
     }    
 
-    fetch('http://localhost:5050/habits/add-habit', {
+    fetch(`http://${localIP ? localIP : 'localhost'}:5050/habits/add-habit`, {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + activeToken,
