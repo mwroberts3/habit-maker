@@ -1,9 +1,173 @@
-body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  background: aliceblue;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+// Main styling
+* {
+  font-family: "Quicksand", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  background: steelblue;
+  height: 100vh;
+}
+
+#footer {
+  font-size: 12px;
+  font-weight: normal;
+  color: #eee;
+  position: absolute;
+  top: calc(100vh - 23px);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    margin-right: 5px;
+  }
+
+  a {
+    color: #eee;
+  }
+
+  #footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .footer-link-separator {
+      display: inline;
+      margin: 2px 5px 0 0;
+      font-size: 3px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+  }
+}
+
+// Utilities
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.light-btn {
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+// Containers & inner elements
+#total-container {
+  margin: 0;
+  height: calc(100vh - 20px);
+  position: relative;
+  padding-top: 20px;
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: aliceblue;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 21.44px;
+  border: 3px solid #fff;
+  border-radius: 5px;
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  #error-msg-display {
+    margin: 0 0 10px;
+  }
+}
+
+#login-signup-form {
+  input[type="text"],
+  input[type="password"] {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #777;
+  }
+
+  label[for="remember-login"] {
+    font-size: 14px;
+  }
+
+  #login-btns-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 5px;
+
+    button:first-of-type {
+      margin-right: 5px;
+    }
+  }
+}
+
+#user-options {
+  display: flex;
+  justify-content: space-between;
+  margin: -15px 2.5px 0;
+
+  button:first-of-type {
+    margin-right: 5px;
+  }
+}
+
+#habit-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .habit-card:nth-child(odd) {
+    margin-left: 2.5px;
+  }
+
+  .habit-card {
+    position: relative;
+    width: calc(50% - 18px);
+    margin: 2.5px 2.5px 0 0;
+    padding: 5px;
+    background-color: #fff;
+    border: 2px solid rgb(31, 162, 223);
+    border-radius: 5px;
+
+    p {
+      margin: 0;
+    }
+
+    .passive {
+      color: red;
+    }
+
+    .active {
+      color: green;
+    }
+
+    .delete-habit-btn {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      top: 2px;
+      right: 3px;
+      text-align: center;
+      font-weight: bolder;
+      border-radius: 50%;
+      background: #fc3636;
+      color: #fff;
+      font-size: 12px;
+    }
+  }
 }
