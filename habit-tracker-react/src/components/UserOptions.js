@@ -1,13 +1,18 @@
 import Button from './Button'
+import { Link } from 'react-router-dom'
 
 const UserOptions = () => {
     return (
         <div id="user-options">
             <div>
-            <Button btnFunction="addHabit" btnDisplay="Add Habit" />
-            <Button btnFunction="viewUserStats" btnDisplay="Stats" />
+            <Link to='/add-habit'>
+            <Button btnFunction="addHabitBtn" btnDisplay="Add Habit" />
+            </Link>
+            <Link to='/stats'>
+            <Button btnFunction="viewUserStatsBtn" btnDisplay="Stats" />
+            </Link>
             </div>
-            <Button btnFunction="logout" btnDisplay="Logout" />
+            <Button btnFunction="logoutBtn" btnDisplay="Logout" />
         </div>
     )
 }

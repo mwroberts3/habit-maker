@@ -35,6 +35,8 @@ body {
       font-size: 3px;
       border-radius: 50%;
       background: #ccc; }
+    #footer #footer-links a {
+      text-decoration: none; }
 
 .hidden {
   display: none !important; }
@@ -53,7 +55,11 @@ body {
   position: relative;
   padding-top: 20px; }
 
-#login-container {
+#login-container,
+#about-container,
+#how-to-use-container,
+#add-habit-container,
+#stats-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,10 +70,57 @@ body {
   padding-bottom: 21.44px;
   border: 3px solid #fff;
   border-radius: 5px; }
-  #login-container h1 {
+  #login-container h1,
+  #about-container h1,
+  #how-to-use-container h1,
+  #add-habit-container h1,
+  #stats-container h1 {
     margin-bottom: 10px; }
-  #login-container #error-msg-display {
+  #login-container #error-msg-display,
+  #about-container #error-msg-display,
+  #how-to-use-container #error-msg-display,
+  #add-habit-container #error-msg-display,
+  #stats-container #error-msg-display {
     margin: 0 0 10px; }
+
+#login-container {
+  width: 360px; }
+
+#about-container,
+#how-to-use-container {
+  font-weight: normal; }
+  #about-container p,
+  #how-to-use-container p {
+    width: 100%;
+    font-size: 20px;
+    padding: 5px; }
+  #about-container p:first-of-type,
+  #how-to-use-container p:first-of-type {
+    margin-bottom: 0px; }
+
+#new-habit-form {
+  width: 100%;
+  text-align: center; }
+  #new-habit-form h3 {
+    margin: 5px; }
+  #new-habit-form label {
+    margin: 5px; }
+  #new-habit-form input[type="text"] {
+    width: 120px;
+    display: block;
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 5px;
+    border: 1px solid #777; }
+  #new-habit-form input[type="number"] {
+    width: 50px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #777; }
+  #new-habit-form button {
+    width: 65px;
+    margin: auto; }
 
 #login-signup-form input[type="text"],
 #login-signup-form input[type="password"] {
@@ -114,14 +167,22 @@ body {
     #habit-list .habit-card .active {
       color: green; }
     #habit-list .habit-card .delete-habit-btn {
+      cursor: pointer;
       position: absolute;
       width: 15px;
       height: 15px;
       top: 2px;
       right: 3px;
-      text-align: center;
       font-weight: bolder;
       border-radius: 50%;
       background: #fc3636;
       color: #fff;
       font-size: 12px; }
+      #habit-list .habit-card .delete-habit-btn .delete-btn-x {
+        position: absolute;
+        bottom: 1px;
+        right: 4.25px; }
+  #habit-list .habit-logged-active {
+    background: #7ff57f; }
+  #habit-list .habit-logged-passive {
+    background: #ff8181; }

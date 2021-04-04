@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom'
 import { FaGithubAlt } from 'react-icons/fa'
 
 const Footer = () => {
     return (
         <div id='footer'>
             <div id='footer-links'>
-                <span>How to Use</span>
+                <span><Link to="/how-to-use">How to Use</Link></span>
                 <div className='footer-link-separator'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                <span>About</span>
+                <span><Link to="/about">About</Link></span>
                 <div className='footer-link-separator'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                 <a href="https://github.com/mwroberts3/habit-tracker" target="blank">
             <FaGithubAlt size={20} style={{marginRight: '5px'}}/>

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+let signUpConfirm = false
+
 const Login = ( {validLoginCheck} ) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -7,8 +9,6 @@ const Login = ( {validLoginCheck} ) => {
     const [remember, setRemember] = useState(false)
     
     const [errMsg, setErrMsg] = useState('')
-
-    let signupSequence = 1
 
     const validateLogin = (e) => {
         e.preventDefault()
@@ -44,14 +44,35 @@ const Login = ( {validLoginCheck} ) => {
         e.preventDefault()
         // console.log(signupSequence)
         document.getElementById('confirm-password-input').classList.remove('hidden')
-        signupSequence++
+    
+        signUpConfirm = true
     }
     
     const validateSignup = (e) => {
         e.preventDefault()
-        console.log('signup button clicked')
-        console.log(email, password, confirmPassword)
-      }
+
+        fetch(`http://localhost:5050/signup`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "email": email,
+                "password": password,
+                "confirmPassword": confirmPassword,
+            })
+        })
+        .then((res) => res.json())
+        .then(res => {
+            if (res.token) {
+                console.log(res.token)
+                localStorage.setItem('token', res.token)
+                validLoginCheck(true)
+            } else {
+                setErrMsg(res.message)
+            }
+        })
+    }
 
     return (
         <div id='login-container'>
@@ -69,9 +90,9 @@ const Login = ( {validLoginCheck} ) => {
             <button id="login-submit" className="light-btn" onClick={(e) => {
                 validateLogin(e)
             }}>Login</button>
-            <button id="signup-submit" className="light-btn" onClick={(e) => {
-                signupSequence === 1 ? showConfirmPassword(e) :
-                validateSignup(e)
+            <button id="signup-submit" className="light-btn" onClick={(e) => { 
+                signUpConfirm ? 
+                validateSignup(e) :showConfirmPassword(e)                    
             }}>Signup</button>
             </div>
         </form>

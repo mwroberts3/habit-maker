@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import HabitCard from './HabitCard'
 
-const HabitList = ({ loggedIn }) => {
+const HabitList = () => {
     const [userHabits, setUserHabits] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    // need to store and retrieve json in localstorage before fetching habits
-    useEffect(() => {
-        let currentDate = new Date(new Date().getTime());
-        currentDate.setHours(0,0,0,0);
+    let currentDate = new Date(new Date().getTime());
+    currentDate.setHours(0,0,0,0);
+    
+    let token = localStorage.getItem('token')
 
-        let token = localStorage.getItem('token')
+    const habitDeletedCheck = () => {
+        setLoading(true)
+    }
+    
+    if (loading) {
+        // Need to somehow check if habit has been completed and I guess log it to some kind of stats collection to then be displayed in the stats component
 
+        setLoading(false)
         fetch(`http://localhost:5050/habits/`, {
             method: 'GET',
             headers: {
@@ -19,18 +26,17 @@ const HabitList = ({ loggedIn }) => {
             }
             })
             .then(res => res.json())
-            .then(res => {
-                if (userHabits.length === 0) setUserHabits(res)
-            })
-    })
-
-    console.log(userHabits)
+            .then(res => setUserHabits(res))
+    }
 
     return (
         <div id='habit-list'>
-            {userHabits.map((habit, index) => (
-            <HabitCard key={ index } habit={ habit }/>
-            ))}
+            {
+            userHabits.length > 0 &&
+                userHabits.map((habit, index) => (
+                <HabitCard key={ index } habit={ habit } habitDeletedCheck = { habitDeletedCheck } passedClass={ habit.updatedToday ? habit.active ? 'habit-card habit-logged-active' : 'habit-card habit-logged-passive' : 'habit-card'}/>
+                ))
+            }
         </div>
     )
 }

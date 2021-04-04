@@ -13,6 +13,7 @@ body {
   height: 100vh;
 }
 
+// need to add some kind of media query if the contents of the page are bigger than the display
 #footer {
   font-size: 12px;
   font-weight: normal;
@@ -46,6 +47,10 @@ body {
       border-radius: 50%;
       background: #ccc;
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 }
 
@@ -71,7 +76,11 @@ body {
   padding-top: 20px;
 }
 
-#login-container {
+#login-container,
+#about-container,
+#how-to-use-container,
+#add-habit-container,
+#stats-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,6 +98,60 @@ body {
 
   #error-msg-display {
     margin: 0 0 10px;
+  }
+}
+
+#login-container {
+  width: 360px;
+}
+
+#about-container,
+#how-to-use-container {
+  font-weight: normal;
+
+  p {
+    width: 100%;
+    font-size: 20px;
+    padding: 5px;
+  }
+
+  p:first-of-type {
+    margin-bottom: 0px;
+  }
+}
+
+#new-habit-form {
+  width: 100%;
+  text-align: center;
+
+  h3 {
+    margin: 5px;
+  }
+
+  label {
+    margin: 5px;
+  }
+
+  input[type="text"] {
+    width: 120px;
+    display: block;
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 5px;
+    border: 1px solid #777;
+  }
+
+  input[type="number"] {
+    width: 50px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #777;
+  }
+
+  button {
+    width: 65px;
+    margin: auto;
   }
 }
 
@@ -157,17 +220,31 @@ body {
     }
 
     .delete-habit-btn {
+      cursor: pointer;
       position: absolute;
       width: 15px;
       height: 15px;
       top: 2px;
       right: 3px;
-      text-align: center;
       font-weight: bolder;
       border-radius: 50%;
       background: #fc3636;
       color: #fff;
       font-size: 12px;
+
+      .delete-btn-x {
+        position: absolute;
+        bottom: 1px;
+        right: 4.25px;
+      }
     }
+  }
+
+  .habit-logged-active {
+    background: rgb(127, 245, 127);
+  }
+
+  .habit-logged-passive {
+    background: rgb(255, 129, 129);
   }
 }
