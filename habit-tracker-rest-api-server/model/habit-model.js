@@ -12,6 +12,7 @@ const habitSchema = new Schema(
         createdAt: String, 
         lastUpdated: String,
         updatedToday: Boolean,
+        completed: Boolean,
         creator: {
             type: Schema.Types.ObjectId,
             ref: 'User',

@@ -4,21 +4,18 @@ const Mongoose = require('mongoose');
 exports.loadHabits = async (req, res, next) => {
     let currentDate = req.get('Timestamp');
     let editedHabits = [];
+    let failedHabits = [];
 
     let habits = await Habit.find({ creator: req.userId});
 
     habits = Array.from(habits);
 
     for(let i = 0; i < habits.length; i++) {  
-        let diffTime = Math.abs(new Date(currentDate) - new Date(habits[i].lastUpdated))
+        let diffTime = Math.abs(new Date(currentDate) - new Date(habits[i].lastUpdated));
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        console.log('diff days', diffDays);
-
+        // check how many days have passed since last log in and adjust accordingly
         if (diffDays > 0) {
-            // if it's a passive hobby update days passed and streak automatically
-            // ...need a way to count the number of days that have passed since the last update though
-            // console.log(habits[i]);
             if (!habits[i].active) {
                 if (habits[i].updatedToday) {
                     habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { lastUpdated: new Date(currentDate), $inc : {daysLogged: diffDays - 1, daysLeft: -diffDays}}, {
@@ -40,37 +37,47 @@ exports.loadHabits = async (req, res, next) => {
             habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { updatedToday: false }, {
                 new: true
             })
-
-    
-            // if it's a passive hobby update days passed and streak automatically
-            // ...need a way to count the number of days that have passed since the last update though
+        }
+        
+        // check if days passed has reached 0
+        // goal has not been reached
+        if (habits[i].daysLeft <= 0) {
+            failedHabits.push(habits[i].description);
         }
     }
 
-
     habits = await Habit.find({ creator: req.userId});
-
-    // console.log(habits);
 
     // push retreived data into new array to hide userId
     Array.from(habits).forEach((habit) => {
-        let habitToAdd = {};
-        habitToAdd.active = habit.active;
-        habitToAdd.description = habit.description;
-        habitToAdd.goal = habit.goal;
-        habitToAdd.daysLogged = habit.daysLogged;
-        habitToAdd.daysLeft = habit.daysLeft;
-        habitToAdd.skipDays = habit.skipDays;
-        habitToAdd.streak = habit.streak;
-        habitToAdd.lastUpdated = habit.lastUpdated;
-        habitToAdd.createdAt = habit.createdAt;
+        let habitToLoad = {};
+        habitToLoad.active = habit.active;
+        habitToLoad.description = habit.description;
+        habitToLoad.goal = habit.goal;
+        habitToLoad.daysLogged = habit.daysLogged;
+        habitToLoad.daysLeft = habit.daysLeft;
+        habitToLoad.skipDays = habit.skipDays;
+        habitToLoad.streak = habit.streak;
+        habitToLoad.lastUpdated = habit.lastUpdated;
+        habitToLoad.createdAt = habit.createdAt;
+        habitToLoad.updatedToday = habit.updatedToday;
+        habitToLoad.completed = habit.completed;
 
-        habitToAdd.updatedToday = habit.updatedToday;
-
-        editedHabits.push(habitToAdd);
+        editedHabits.push(habitToLoad);
     });
+
+    // check for any failed habits
+    for (let i=0; i < editedHabits.length; i++) {
+        for (let k=0; k < failedHabits.length; k++) {
+            if (editedHabits[i].description == failedHabits[k]) {
+                editedHabits[i].failed = true;
+            } else {
+                editedHabits[i].failed = false;
+            }
+        }
+    }
     
-    res.json(editedHabits);
+    res.json({editedHabits});
 };
 
 exports.addNewHabit = (req, res, next) => {
@@ -84,13 +91,8 @@ exports.addNewHabit = (req, res, next) => {
         daysLeft: req.body.daysLeft,
         lastUpdated: req.get('Timestamp'),
         updatedToday: false,
+        completed: false,
         createdAt: req.body.createdAtDate,
-        streak: 0,
-        skipDays: {
-            option: req.body.skipPerDays > 0 ? true : false,
-            streakUnlock: req.body.skipPerDays,
-            count: 0
-        },
         creator: Mongoose.Types.ObjectId(req.userId)
     });
     
@@ -113,28 +115,47 @@ exports.logHabit = async (req, res, next) => {
 
     let habit = await Habit.findOne({ creator: req.userId, description: req.body.habitDesc });
 
-    habit.active ? habitType = {type: 'active', increment: 1} : habitType = {type: 'passive', increment: 0};
+    if (habit.active && habit.daysLogged === habit.goal - 1) {
+        habitType = { 
+            type: 'active',
+            increment: 1,
+            completed: true
+        }
+    } else if (habit.active) {
+        habitType = {
+            type: 'active',
+            increment: 1,
+            completed: false
+        }
+    } else {
+        habitType = {
+            type: 'passive',
+            increment: 0,
+            completed: false
+        }
+    }
 
     // check to see if habit has already been updated today
     habit.updatedToday === true ? habitType.increment = 0 : '';
 
-    Habit.findOneAndUpdate({ creator: req.userId, description: req.body.habitDesc }, { updatedToday: true, lastUpdated: req.body.lastUpdated, $inc : { daysLogged: habitType.increment}}, {
+    Habit.findOneAndUpdate({ creator: req.userId, description: req.body.habitDesc }, { updatedToday: true, lastUpdated: req.body.lastUpdated, completed: habitType.completed, $inc : { daysLogged: habitType.increment}}, {
         new: true
     })
     .then((habit) => {
-        let habitToAdd = {};
-        habitToAdd.active = habit.active;
-        habitToAdd.description = habit.description;
-        habitToAdd.goal = habit.goal;
-        habitToAdd.daysLogged = habit.daysLogged;
-        habitToAdd.daysLeft = habit.daysLeft;
-        habitToAdd.skipDays = habit.skipDays;
-        habitToAdd.streak = habit.streak;
-        habitToAdd.lastUpdated = req.body.lastUpdated;
-        habitToAdd.updatedToday = habit.updatedToday;
-        habitToAdd.createdAt = habit.createdAt;
-        console.log(habitToAdd);
-        res.status(201).json(habitToAdd);
+        let habitToUpdate = {};
+        habitToUpdate.active = habit.active;
+        habitToUpdate.description = habit.description;
+        habitToUpdate.goal = habit.goal;
+        habitToUpdate.daysLogged = habit.daysLogged;
+        habitToUpdate.daysLeft = habit.daysLeft;
+        habitToUpdate.skipDays = habit.skipDays;
+        habitToUpdate.streak = habit.streak;
+        habitToUpdate.lastUpdated = req.body.lastUpdated;
+        habitToUpdate.updatedToday = habit.updatedToday;
+        habitToUpdate.createdAt = habit.createdAt;
+
+        console.log(habitToUpdate);
+        res.status(201).json(habitToUpdate);
 
         console.log(new Date(habit.createdAt).getTime(), new Date(habit.lastUpdated).getTime());
     })

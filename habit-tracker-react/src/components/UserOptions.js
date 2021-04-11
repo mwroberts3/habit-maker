@@ -9,7 +9,6 @@ const UserOptions = () => {
             <Button btnFunction="addHabitBtn" btnDisplay="Add Habit" />
             </Link>
             <Link to='/stats'>
-            <Button btnFunction="viewUserStatsBtn" btnDisplay="Stats" />
             </Link>
             </div>
             <Button btnFunction="logoutBtn" btnDisplay="Logout" />

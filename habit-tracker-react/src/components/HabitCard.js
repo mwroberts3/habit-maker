@@ -26,13 +26,30 @@ const HabitCard = ({ habit, habitDeletedCheck, passedClass }) => {
 
     return (
         <div id={habit.description} className={passedClass} onClick={(e) => {
-            if (!e.target.classList.contains('delete-btn-x')) logHabit(habit)
+            if (!e.target.classList.contains('delete-btn-x') && !habit.failed && !habit.completed) logHabit(habit)
         }}>
-            <p>{habit.description}</p>
-            <p className={habit.active ? 'active' : 'passive'}>{habit.active ? 'active' : 'passive'}</p>
-            <p>Goal: {habit.daysLogged} / {habit.goal} ({habit.daysLeft})
-            </p>
-            <DeleteHabit habitDesc={habit.description} habitDeletedCheck={ habitDeletedCheck }/>
+            { !habit.failed && !habit.completed && 
+            <div>
+                <p>{habit.description}</p>
+                <p className={habit.active ? 'active' : 'passive'}>{habit.active ? 'active' : 'passive'}</p>
+                <p>Goal: {habit.daysLogged} / {habit.goal} ({habit.daysLeft})
+                </p>
+                <DeleteHabit habitDesc={habit.description} habitDeletedCheck={ habitDeletedCheck }/>
+            </div> }
+            { habit.failed && 
+            <div>
+                <p>{habit.description} Failed</p>
+                <p>{habit.daysLogged} / {habit.goal}</p>
+                <DeleteHabit habitDesc={habit.description} habitDeletedCheck={ habitDeletedCheck }/>
+            </div>
+            }
+            { habit.completed && 
+            <div>
+                <p>{habit.description} Completed</p>
+                <p>{habit.daysLogged} / {habit.goal}</p>
+                <DeleteHabit habitDesc={habit.description} habitDeletedCheck={ habitDeletedCheck }/>
+            </div>
+            }
         </div>
     )
 }

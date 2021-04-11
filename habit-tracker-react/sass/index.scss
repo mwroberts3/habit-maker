@@ -62,6 +62,7 @@ body {
 .light-btn {
   background: #fff;
   padding: 10px;
+  margin-left: 5px;
   border: 1px solid #888;
   border-radius: 5px;
   font-weight: bold;
@@ -70,7 +71,10 @@ body {
 
 // Containers & inner elements
 #total-container {
-  margin: 0;
+  max-width: 1200px;
+  min-width: 320px;
+  width: 100%;
+  margin: 0 auto;
   height: calc(100vh - 20px);
   position: relative;
   padding-top: 20px;
@@ -86,7 +90,7 @@ body {
   justify-content: center;
   align-items: center;
   background: aliceblue;
-  width: 80%;
+  width: 300px;
   margin: auto;
   padding-bottom: 21.44px;
   border: 3px solid #fff;
@@ -194,17 +198,18 @@ body {
   display: flex;
   flex-wrap: wrap;
 
-  .habit-card:nth-child(odd) {
-    margin-left: 2.5px;
+  .habit-card:nth-child(even) {
+    margin-left: 5px;
+    padding-right: 1px;
   }
 
   .habit-card {
     position: relative;
     width: calc(50% - 18px);
-    margin: 2.5px 2.5px 0 0;
+    margin-top: 5px;
+    margin-left: 7.5px;
     padding: 5px;
     background-color: #fff;
-    border: 2px solid rgb(31, 162, 223);
     border-radius: 5px;
 
     p {

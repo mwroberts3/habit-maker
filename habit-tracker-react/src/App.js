@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import { useEffect } from 'react'
+
 import About from './components/links/About'
 import HowToUse from './components/links/HowToUse'
 import Footer from './components/Footer'
@@ -31,11 +33,12 @@ function App() {
     </Router>
     , document.getElementById('root'))
   }
-  
-  // getting error in chrome devtools...also when JWT is expired this should redirect to the home page
-  if (localStorage.getItem('token')) {
-    validLoginCheck(true)
-  }
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      validLoginCheck(true)
+    }
+  })
 
   return (
     <Router>

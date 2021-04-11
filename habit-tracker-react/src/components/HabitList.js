@@ -5,7 +5,7 @@ const HabitList = () => {
     const [userHabits, setUserHabits] = useState([])
     const [loading, setLoading] = useState(true)
 
-    let currentDate = new Date(new Date().getTime());
+    let currentDate = new Date(new Date().getTime())
     currentDate.setHours(0,0,0,0);
     
     let token = localStorage.getItem('token')
@@ -26,7 +26,11 @@ const HabitList = () => {
             }
             })
             .then(res => res.json())
-            .then(res => setUserHabits(res))
+            .then(res => {
+                setUserHabits(res.editedHabits)
+
+                console.log(res.editedHabits)
+            })
     }
 
     return (
