@@ -4,9 +4,14 @@ import React, {useState} from 'react'
 
 const AddHabit = () => {
     const [newHabitSubmitted, setNewHabitSubmitted] = useState(false)
+    const [addHabitFormClosed, setAddHabitFormClosed] = useState(false)
 
-    if (newHabitSubmitted) {
+    if (newHabitSubmitted || addHabitFormClosed) {
         return (<Redirect to='/' />)
+    }
+
+    const closeAddHabitForm = () => {
+      setAddHabitFormClosed(true)
     }
 
     const submitNewHabit = () => {
@@ -43,7 +48,7 @@ const AddHabit = () => {
         <form id='new-habit-form'>
           <h3>Add New Habit</h3>
           <label htmlFor="description">Short Description</label>
-          <input name="description" type="text" />
+          <input name="description" type="text" required/>
           <h3>Update Style</h3>
           <input type="radio" name="updateStyle" value="active" />
           <label htmlFor="active-update">active</label>
@@ -51,15 +56,16 @@ const AddHabit = () => {
           <label htmlFor="passive-update">passive</label>
           <div>
             <label htmlFor="days">Goal</label>
-            <input name="daysGoal" type="number" />
+            <input name="daysGoal" type="number" required/>
             Days
           </div>
           <div>
             <label htmlFor="days">Time</label>
-            <input name="daysLeft" type="number" />
+            <input name="daysLeft" type="number" required/>
             Days
           </div>
           <Button btnDisplay='Submit' btnFunction='submitNewHabitBtn' functionLiteral={submitNewHabit} />
+          <Button btnDisplay='Close' btnFunction='closeAddHabitForm' functionLiteral={closeAddHabitForm} />
         </form>
       </div>
     )

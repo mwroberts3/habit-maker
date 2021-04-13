@@ -14,6 +14,12 @@ import AddHabit from './components/AddHabit'
 function App() {
   let loggedIn = false
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      validLoginCheck(true)
+    }
+  })
+
   const validLoginCheck = (validated) => {
     if (validated) {
 
@@ -34,12 +40,6 @@ function App() {
       , document.getElementById('root'))
     }
   }
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      validLoginCheck(true)
-    }
-  })
 
   return (
     <Router>

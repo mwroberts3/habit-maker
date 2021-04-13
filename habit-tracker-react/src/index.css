@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 * {
-  font-family: "Quicksand", sans-serif; }
+  font-family: "Quicksand", sans-serif;
+  box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -45,6 +46,7 @@ body {
   background: #fff;
   padding: 10px;
   margin-left: 5px;
+  margin-bottom: -2px;
   border: 1px solid #888;
   border-radius: 5px;
   font-weight: bold;
@@ -154,13 +156,10 @@ body {
 #habit-list {
   display: flex;
   flex-wrap: wrap; }
-  #habit-list .habit-card:nth-child(even) {
-    margin-left: 5px;
-    padding-right: 1px; }
   #habit-list .habit-card {
     position: relative;
-    width: calc(50% - 18px);
-    margin-top: 5px;
+    width: calc(50% - 12px);
+    margin-top: 7.5px;
     margin-left: 7.5px;
     padding: 5px;
     background-color: #fff;
