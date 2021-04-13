@@ -15,23 +15,24 @@ function App() {
   let loggedIn = false
 
   const validLoginCheck = (validated) => {
-    if (validated) loggedIn = true
+    if (validated) {
 
-    // re-render to show only the habit list contain and user options
-    ReactDOM.render(
-    <Router>
-    <div id="total-container">
-      <Route exact path='/'>
-        <UserOptions />
-        <HabitList loggedIn={loggedIn}/>
-      </Route>
-      <Route path='/add-habit' component={AddHabit} />
-      <Route path='/about' component={About} />
-      <Route path='/how-to-use' component={HowToUse} />
-      <Footer />
-    </div>
-    </Router>
-    , document.getElementById('root'))
+      // re-render to show only the habit list contain and user options
+      ReactDOM.render(
+      <Router>
+      <div id="total-container">
+        <Route exact path='/'>
+          <UserOptions />
+          <HabitList validLoginCheck={validLoginCheck}/>
+        </Route>
+        <Route path='/add-habit' component={AddHabit} />
+        <Route path='/about' component={About} />
+        <Route path='/how-to-use' component={HowToUse} />
+        <Footer />
+      </div>
+      </Router>
+      , document.getElementById('root'))
+    }
   }
 
   useEffect(() => {

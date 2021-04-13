@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaCubes } from 'react-icons/fa'
 
 let signUpConfirm = false
 
@@ -76,7 +77,9 @@ const Login = ( {validLoginCheck} ) => {
 
     return (
         <div id='login-container'>
-        <h1>Habit Tracker</h1>
+        <div>
+            <h1>Habit Maker</h1>&nbsp;<FaCubes size={20}/>
+        </div>
         <p id='error-msg-display'>{errMsg !== '' ? `${errMsg}` : (<span>&nbsp;</span>)}</p>
         <form className="login" id="login-signup-form" name="login"> 
             <input id="login-email" name="email" type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>

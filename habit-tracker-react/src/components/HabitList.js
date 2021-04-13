@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import HabitCard from './HabitCard'
 
-const HabitList = () => {
+const HabitList = ({validLoginCheck}) => {
     const [userHabits, setUserHabits] = useState([])
     const [loading, setLoading] = useState(true)
 
     let currentDate = new Date(new Date().getTime())
-    currentDate.setHours(0,0,0,0);
+    currentDate.setHours(0,0,0,0)
     
     let token = localStorage.getItem('token')
 
@@ -27,9 +27,17 @@ const HabitList = () => {
             })
             .then(res => res.json())
             .then(res => {
-                setUserHabits(res.editedHabits)
+                console.log(res)
 
-                console.log(res.editedHabits)
+                if (res.message === "jwt expired" || res.message === "Not authenticated.") {
+                    localStorage.removeItem('token')
+                    validLoginCheck(false)
+
+                    // this should actually reload the login page with a 'session expired' message
+                    window.location.reload()
+                } else {
+                    setUserHabits(res.editedHabits)
+                }
             })
     }
 

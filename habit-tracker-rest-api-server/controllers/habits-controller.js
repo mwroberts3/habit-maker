@@ -25,6 +25,10 @@ exports.loadHabits = async (req, res, next) => {
                     habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description }, { lastUpdated: new Date(currentDate), $inc : { daysLogged: diffDays,daysLeft: -diffDays}}, {
                         new: true
                     })
+
+                    if (habits[i].daysLogged === habits[i].goal) {
+                        habits[i] = await Habit.findOneAndUpdate({ creator: req.userId, description: habits[i].description}, {completed: true})
+                    }
                 }
             }
 
@@ -41,7 +45,7 @@ exports.loadHabits = async (req, res, next) => {
         
         // check if days passed has reached 0
         // goal has not been reached
-        if (habits[i].daysLeft <= 0) {
+        if (habits[i].daysLeft <= 0 && !habits[i].completed) {
             failedHabits.push(habits[i].description);
         }
     }
@@ -105,7 +109,7 @@ exports.addNewHabit = (req, res, next) => {
               err.statusCode = 500;
             }
             next(err);
-          });
+        });
     
 };
 
