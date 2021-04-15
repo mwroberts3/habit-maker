@@ -4,7 +4,7 @@ const DeleteHabit = ({ habitDesc, habitDeletedCheck }) => {
     const deleteHabitRequest = () => {
         let token = localStorage.getItem('token')
 
-        fetch(`http://localhost:5050/habits/delete-habit`, {
+        fetch(`https://habit-maker-api.herokuapp.com/habits/delete-habit`, {
             method: 'DELETE',
             headers: {
                 Authorization: 'Bearer ' + token,

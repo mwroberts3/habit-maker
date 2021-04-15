@@ -76,17 +76,27 @@ body {
   padding-bottom: 21.44px;
   border: 3px solid #fff;
   border-radius: 5px; }
-  #login-container h1,
-  #about-container h1,
-  #how-to-use-container h1,
-  #add-habit-container h1,
-  #stats-container h1 {
-    margin-bottom: 10px; }
+  #login-container #login-header,
+  #about-container #login-header,
+  #how-to-use-container #login-header,
+  #add-habit-container #login-header,
+  #stats-container #login-header {
+    color: #f7be26;
+    font-size: 45px;
+    margin-bottom: -12px;
+    text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666, 1px 1px 0 #666; }
+    #login-container #login-header .header-icon,
+    #about-container #login-header .header-icon,
+    #how-to-use-container #login-header .header-icon,
+    #add-habit-container #login-header .header-icon,
+    #stats-container #login-header .header-icon {
+      color: #f0b515; }
   #login-container #error-msg-display,
   #about-container #error-msg-display,
   #how-to-use-container #error-msg-display,
   #add-habit-container #error-msg-display,
   #stats-container #error-msg-display {
+    color: #333;
     margin: 0 0 10px; }
 
 #login-container {

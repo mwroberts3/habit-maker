@@ -32,7 +32,7 @@ const AddHabit = () => {
 
         let token = localStorage.getItem('token')
 
-        fetch('http://localhost:5050/habits/add-habit', {
+        fetch('https://habit-maker-api.herokuapp.com/habits/add-habit', {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token,

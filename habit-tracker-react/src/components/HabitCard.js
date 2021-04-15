@@ -8,7 +8,7 @@ const HabitCard = ({ habit, habitDeletedCheck, passedClass }) => {
 
         let token = localStorage.getItem('token')
 
-        fetch(`http://localhost:5050/habits/log-habit`, {
+        fetch(`https://habit-maker-api.herokuapp.com/habits/log-habit`, {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token,
