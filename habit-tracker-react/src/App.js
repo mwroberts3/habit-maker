@@ -12,8 +12,8 @@ import UserOptions from './components/UserOptions'
 import AddHabit from './components/AddHabit'
 
 function App() {
-  // const serverUrl = 'https://habit-target-api.herokuapp.com'
-  const serverUrl = 'http://localhost:5050'
+  const serverUrl = 'https://habit-target-api.herokuapp.com'
+  // const serverUrl = 'http://localhost:5050'
     
   useEffect(() => {
     if (localStorage.getItem('token')) {
