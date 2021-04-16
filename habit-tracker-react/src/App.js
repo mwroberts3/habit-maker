@@ -12,8 +12,9 @@ import UserOptions from './components/UserOptions'
 import AddHabit from './components/AddHabit'
 
 function App() {
-  let loggedIn = false
-
+  // const serverUrl = 'https://habit-target-api.herokuapp.com'
+  const serverUrl = 'http://localhost:5050'
+    
   useEffect(() => {
     if (localStorage.getItem('token')) {
       validLoginCheck(true)
@@ -29,9 +30,9 @@ function App() {
       <div id="total-container">
         <Route exact path='/'>
           <UserOptions />
-          <HabitList validLoginCheck={validLoginCheck}/>
+          <HabitList validLoginCheck={validLoginCheck}  serverUrl={serverUrl}/>
         </Route>
-        <Route path='/add-habit' component={AddHabit} />
+        <Route path='/add-habit' component={AddHabit}  serverUrl={serverUrl}/>
         <Route path='/about' component={About} />
         <Route path='/how-to-use' component={HowToUse} />
         <Footer />
@@ -45,7 +46,7 @@ function App() {
     <Router>
     <div id="total-container">
       <Route exact path='/'>
-          <Login validLoginCheck={ validLoginCheck}/>
+          <Login validLoginCheck={ validLoginCheck} serverUrl={serverUrl}/>
       </Route>
       <Route path='/about' component={About} />
       <Route path='/how-to-use' component={HowToUse} />

@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import HabitCard from './HabitCard'
 
-const HabitList = ({validLoginCheck}) => {
+const HabitList = ({validLoginCheck, serverUrl}) => {
+    const history = useHistory()
+
     const [userHabits, setUserHabits] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -13,12 +16,10 @@ const HabitList = ({validLoginCheck}) => {
     const habitDeletedCheck = () => {
         setLoading(true)
     }
-    
+  
     if (loading) {
-        // Need to somehow check if habit has been completed and I guess log it to some kind of stats collection to then be displayed in the stats component
-
         setLoading(false)
-        fetch(`https://habit-target-api.herokuapp.com/habits`, {
+        fetch(`${serverUrl}/habits`, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -35,7 +36,9 @@ const HabitList = ({validLoginCheck}) => {
                     validLoginCheck(false)
 
                     // this should actually reload the login page with a 'session expired' message
-                    window.location.reload()
+                    // return (<Redirect to="/" />)
+                    // window.location.reload()
+                    history.go(0)
                 } else {
                     setUserHabits(res.editedHabits)
                 }
@@ -47,7 +50,7 @@ const HabitList = ({validLoginCheck}) => {
             {
             userHabits.length > 0 &&
                 userHabits.map((habit, index) => (
-                <HabitCard key={ index } habit={ habit } habitDeletedCheck = { habitDeletedCheck } passedClass={ habit.updatedToday ? habit.active ? 'habit-card habit-logged-active' : 'habit-card habit-logged-passive' : 'habit-card'}/>
+                <HabitCard serverUrl={ serverUrl }key={ index } habit={ habit } habitDeletedCheck = { habitDeletedCheck } passedClass={ habit.updatedToday ? habit.active ? 'habit-card habit-logged-active' : 'habit-card habit-logged-passive' : 'habit-card'}/>
                 ))
             }
         </div>

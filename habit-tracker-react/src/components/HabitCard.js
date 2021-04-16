@@ -1,6 +1,6 @@
 import DeleteHabit from './DeleteHabit'
 
-const HabitCard = ({ habit, habitDeletedCheck, passedClass }) => {
+const HabitCard = ({ habit, habitDeletedCheck, passedClass, serverUrl }) => {
     const logHabit = (habit) => {
         // Need to somehow check if habit has been completed and I guess log it to some kind of stats collection to then be displayed in the stats component
         let lastUpdated = new Date(new Date().getTime())
@@ -8,7 +8,7 @@ const HabitCard = ({ habit, habitDeletedCheck, passedClass }) => {
 
         let token = localStorage.getItem('token')
 
-        fetch(`https://habit-target-api.herokuapp.com/habits/log-habit`, {
+        fetch(`${serverUrl}/habits/log-habit`, {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token,

@@ -2,7 +2,7 @@ import Button from './Button'
 import {Redirect} from 'react-router-dom'
 import React, {useState} from 'react'
 
-const AddHabit = () => {
+const AddHabit = ({serverUrl}) => {
     const [newHabitSubmitted, setNewHabitSubmitted] = useState(false)
     const [addHabitFormClosed, setAddHabitFormClosed] = useState(false)
 
@@ -32,7 +32,7 @@ const AddHabit = () => {
 
         let token = localStorage.getItem('token')
 
-        fetch('https://habit-target-api.herokuapp.com/habits/add-habit', {
+        fetch(`${serverUrl}/habits/add-habit`, {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token,

@@ -3,7 +3,7 @@ import { FaCubes } from 'react-icons/fa'
 
 let signUpConfirm = false
 
-const Login = ( {validLoginCheck} ) => {
+const Login = ( {validLoginCheck, serverUrl} ) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -11,14 +11,12 @@ const Login = ( {validLoginCheck} ) => {
     
     const [errMsg, setErrMsg] = useState('')
 
-    // http://localhost:5050
-
     const validateLogin = (e) => {
         e.preventDefault()
         console.log('login button clicked')
         console.log(email, password, remember)
 
-        fetch(`https://habit-target-api.herokuapp.com/login`, {
+        fetch(`${serverUrl}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +52,7 @@ const Login = ( {validLoginCheck} ) => {
     const validateSignup = (e) => {
         e.preventDefault()
 
-        fetch(`https://habit-target-api.herokuapp.com/signup`, {
+        fetch(`${serverUrl}/signup`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
