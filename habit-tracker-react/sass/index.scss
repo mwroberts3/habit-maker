@@ -83,8 +83,6 @@ body {
 }
 
 #login-container,
-#about-container,
-#how-to-use-container,
 #add-habit-container,
 #stats-container {
   display: flex;
@@ -123,15 +121,31 @@ body {
 #about-container,
 #how-to-use-container {
   font-weight: normal;
+  color: #fff;
 
   p {
-    width: 100%;
+    margin: auto;
+    width: 365px;
     font-size: 20px;
-    padding: 5px;
+    padding: 5px 0;
+
+    span {
+      font-size: 18px;
+    }
+
+    button {
+      cursor: pointer;
+      margin: 0;
+    }
   }
 
   p:first-of-type {
     margin-bottom: 0px;
+  }
+
+  h2 {
+    margin: auto;
+    width: 365px;
   }
 }
 

@@ -18,7 +18,7 @@ const Login = ( {validLoginCheck} ) => {
         console.log('login button clicked')
         console.log(email, password, remember)
 
-        fetch(`https://habit-maker-api.herokuapp.com/login`, {
+        fetch(`https://habit-target-api.herokuapp.com/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ const Login = ( {validLoginCheck} ) => {
     const validateSignup = (e) => {
         e.preventDefault()
 
-        fetch(`https://habit-maker-api.herokuapp.com/signup`, {
+        fetch(`https://habit-target-api.herokuapp.com/signup`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ const Login = ( {validLoginCheck} ) => {
     return (
         <div id='login-container'>
         <div>
-            <h1 id="login-header">Habit Maker <FaCubes className="header-icon" size={35}/></h1>&nbsp;
+            <h1 id="login-header">Habit Target <FaCubes className="header-icon" size={35}/></h1>&nbsp;
         </div>
         <p id='error-msg-display'>{errMsg !== '' ? `${errMsg}` : (<span>&nbsp;</span>)}</p>
         <form className="login" id="login-signup-form" name="login"> 

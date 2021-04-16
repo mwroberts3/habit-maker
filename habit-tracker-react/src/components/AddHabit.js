@@ -20,7 +20,7 @@ const AddHabit = () => {
 
         const formData = new FormData(document.getElementById('new-habit-form'))
         let formDataObj = {}
-    
+        
         // add local timezone date
         let date = new Date(new Date(Date.now()).getTime())
         date = date.setHours(0,0,0,0)
@@ -32,7 +32,7 @@ const AddHabit = () => {
 
         let token = localStorage.getItem('token')
 
-        fetch('https://habit-maker-api.herokuapp.com/habits/add-habit', {
+        fetch('https://habit-target-api.herokuapp.com/habits/add-habit', {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -48,7 +48,7 @@ const AddHabit = () => {
         <form id='new-habit-form'>
           <h3>Add New Habit</h3>
           <label htmlFor="description">Short Description</label>
-          <input name="description" type="text" required/>
+          <input id="habit-description" name="description" type="text" required/>
           <h3>Update Style</h3>
           <input type="radio" name="updateStyle" value="active" />
           <label htmlFor="active-update">active</label>

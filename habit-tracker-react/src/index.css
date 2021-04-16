@@ -62,8 +62,6 @@ body {
   padding-top: 20px; }
 
 #login-container,
-#about-container,
-#how-to-use-container,
 #add-habit-container,
 #stats-container {
   display: flex;
@@ -77,8 +75,6 @@ body {
   border: 3px solid #fff;
   border-radius: 5px; }
   #login-container #login-header,
-  #about-container #login-header,
-  #how-to-use-container #login-header,
   #add-habit-container #login-header,
   #stats-container #login-header {
     color: #f7be26;
@@ -86,14 +82,10 @@ body {
     margin-bottom: -12px;
     text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666, 1px 1px 0 #666; }
     #login-container #login-header .header-icon,
-    #about-container #login-header .header-icon,
-    #how-to-use-container #login-header .header-icon,
     #add-habit-container #login-header .header-icon,
     #stats-container #login-header .header-icon {
       color: #f0b515; }
   #login-container #error-msg-display,
-  #about-container #error-msg-display,
-  #how-to-use-container #error-msg-display,
   #add-habit-container #error-msg-display,
   #stats-container #error-msg-display {
     color: #333;
@@ -104,15 +96,28 @@ body {
 
 #about-container,
 #how-to-use-container {
-  font-weight: normal; }
+  font-weight: normal;
+  color: #fff; }
   #about-container p,
   #how-to-use-container p {
-    width: 100%;
+    margin: auto;
+    width: 365px;
     font-size: 20px;
-    padding: 5px; }
+    padding: 5px 0; }
+    #about-container p span,
+    #how-to-use-container p span {
+      font-size: 18px; }
+    #about-container p button,
+    #how-to-use-container p button {
+      cursor: pointer;
+      margin: 0; }
   #about-container p:first-of-type,
   #how-to-use-container p:first-of-type {
     margin-bottom: 0px; }
+  #about-container h2,
+  #how-to-use-container h2 {
+    margin: auto;
+    width: 365px; }
 
 #new-habit-form {
   width: 100%;

@@ -18,7 +18,7 @@ const HabitList = ({validLoginCheck}) => {
         // Need to somehow check if habit has been completed and I guess log it to some kind of stats collection to then be displayed in the stats component
 
         setLoading(false)
-        fetch(`https://habit-maker-api.herokuapp.com/habits`, {
+        fetch(`https://habit-target-api.herokuapp.com/habits`, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + token,
