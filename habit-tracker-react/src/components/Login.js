@@ -13,8 +13,6 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
 
     const validateLogin = (e) => {
         e.preventDefault()
-        console.log('login button clicked')
-        console.log(email, password, remember)
 
         fetch(`${serverUrl}/login`, {
             method: 'POST',
@@ -32,7 +30,6 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
         })
         .then(res => {
             if (res.token) {
-                console.log(res.token)
                 localStorage.setItem('token', res.token)
                 validLoginCheck(true)
             } else {
@@ -43,7 +40,6 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
 
     const showConfirmPassword = (e) => {
         e.preventDefault()
-        // console.log(signupSequence)
         document.getElementById('confirm-password-input').classList.remove('hidden')
     
         signUpConfirm = true
@@ -66,7 +62,6 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
         .then((res) => res.json())
         .then(res => {
             if (res.token) {
-                console.log(res.token)
                 localStorage.setItem('token', res.token)
                 validLoginCheck(true)
             } else {

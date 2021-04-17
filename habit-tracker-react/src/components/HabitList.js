@@ -29,8 +29,6 @@ const HabitList = ({validLoginCheck, serverUrl}) => {
             })
             .then(res => res.json())
             .then(res => {
-                console.log(res)
-
                 if (res.message === "jwt expired" || res.message === "Not authenticated.") {
                     localStorage.removeItem('token')
                     validLoginCheck(false)
