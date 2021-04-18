@@ -13,3 +13,8 @@ Habit maker is a productivity tool, designed to help users build new habits.
 ## Usage
 
 Users select a habit name, a time period, and an amount of days within that timeframe that they want to perform this habit. For example, you might want to build up a habit of keeping your room clean, so you could set a timeframe of 30 days and a goal of cleaning your room 15 days out of those 30.
+
+## Future Updates
+
+- option to restart a particular habit after the time period runs out
+- collect statistics for users so they can see what habits they accomplished or failed at and maybe give an overall percentage of completed habits

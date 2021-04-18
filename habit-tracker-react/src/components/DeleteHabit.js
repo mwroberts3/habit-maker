@@ -22,9 +22,7 @@ const DeleteHabit = ({ habitDesc, habitDeletedCheck }) => {
         <div className='delete-habit-btn' onClick={() => {
             deleteHabitRequest()
         }}>
-            <span className='delete-btn-x'>
-                x
-            </span>
+            <span className='delete-btn-x'>x</span>
         </div>
     )
 }

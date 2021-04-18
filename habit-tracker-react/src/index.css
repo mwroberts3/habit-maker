@@ -194,22 +194,11 @@ body {
       color: red; }
     #habit-list .habit-card .active {
       color: green; }
-    #habit-list .habit-card .delete-habit-btn {
-      cursor: pointer;
+    #habit-list .habit-card .delete-habit-btn .delete-btn-x {
       position: absolute;
-      width: 15px;
-      height: 15px;
-      top: 2px;
-      right: 3px;
-      font-weight: bolder;
-      border-radius: 50%;
-      background: #fc3636;
-      color: #fff;
-      font-size: 12px; }
-      #habit-list .habit-card .delete-habit-btn .delete-btn-x {
-        position: absolute;
-        bottom: 1px;
-        right: 4.25px; }
+      top: -2px;
+      right: 5px;
+      color: red; }
   #habit-list .habit-logged-active {
     background: #7ff57f; }
   #habit-list .habit-logged-passive {
