@@ -12,9 +12,16 @@ import UserOptions from './components/UserOptions'
 import AddHabit from './components/AddHabit'
 
 function App() {
-  const serverUrl = 'https://habit-target-api.herokuapp.com'
-  // const serverUrl = 'http://localhost:5050'
-    
+  console.log(process.env)
+
+  let serverUrl;
+
+  if (process.env.NODE_ENV === "development") {
+    serverUrl = 'http://localhost:5050'
+  } else {
+    serverUrl = 'https://habit-target-api.herokuapp.com'
+  }
+  
   useEffect(() => {
     if (localStorage.getItem('token')) {
       validLoginCheck(true)
@@ -28,15 +35,19 @@ function App() {
       ReactDOM.render(
       <Router>
       <div id="total-container">
-        <Route exact path='/'>
-          <UserOptions />
-          <HabitList validLoginCheck={validLoginCheck}  serverUrl={serverUrl}/>
-        </Route>
-        <Route path='/add-habit' component={AddHabit}  serverUrl={serverUrl}/>
-        <Route path='/about' component={About} />
-        <Route path='/how-to-use' component={HowToUse} />
-        <Footer />
+        <div className="inner-contents"> 
+          <Route exact path='/'>
+            <UserOptions />
+            <HabitList validLoginCheck={validLoginCheck}  serverUrl={serverUrl}/>
+          </Route>
+          <Route exact path='/add-habit'>
+            <AddHabit serverUrl={serverUrl} />
+          </Route>
+          <Route path='/about' component={About} />
+          <Route path='/how-to-use' component={HowToUse} />
+        </div>
       </div>
+        <Footer />
       </Router>
       , document.getElementById('root'))
     }
@@ -45,11 +56,13 @@ function App() {
   return (
     <Router>
     <div id="total-container">
+      <div className="inner-contents">
       <Route exact path='/'>
           <Login validLoginCheck={ validLoginCheck} serverUrl={serverUrl}/>
       </Route>
       <Route path='/about' component={About} />
       <Route path='/how-to-use' component={HowToUse} />
+      </div>
       <Footer />
     </div>
     </Router>

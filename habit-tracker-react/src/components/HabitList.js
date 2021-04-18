@@ -33,9 +33,6 @@ const HabitList = ({validLoginCheck, serverUrl}) => {
                     localStorage.removeItem('token')
                     validLoginCheck(false)
 
-                    // this should actually reload the login page with a 'session expired' message
-                    // return (<Redirect to="/" />)
-                    // window.location.reload()
                     history.go(0)
                 } else {
                     setUserHabits(res.editedHabits)

@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
+$input-font-size: 17px;
+
 // Main styling
 * {
   font-family: "Quicksand", sans-serif;
@@ -19,8 +21,7 @@ body {
   font-size: 12px;
   font-weight: normal;
   color: #eee;
-  position: absolute;
-  top: calc(100vh - 23px);
+  height: 20px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -72,14 +73,18 @@ body {
 }
 
 // Containers & inner elements
+.inner-contents {
+  padding-top: 20px;
+  min-height: calc(100vh - 25px);
+}
+
 #total-container {
   max-width: 1200px;
   min-width: 320px;
   width: 100%;
   margin: 0 auto;
-  height: calc(100vh - 20px);
   position: relative;
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 
 #login-container,
@@ -92,13 +97,14 @@ body {
   background: aliceblue;
   width: 300px;
   margin: auto;
-  padding-bottom: 21.44px;
+  padding-bottom: 10px;
   border: 3px solid #fff;
   border-radius: 5px;
 
   #login-header {
     color: #f7be26;
     font-size: 45px;
+    margin-top: -5px;
     margin-bottom: -12px;
     text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666,
       1px 1px 0 #666;
@@ -168,6 +174,7 @@ body {
     margin: 5px auto;
     border-radius: 5px;
     border: 1px solid #777;
+    font-size: $input-font-size;
   }
 
   input[type="number"] {
@@ -176,6 +183,7 @@ body {
     margin: 5px;
     border-radius: 5px;
     border: 1px solid #777;
+    font-size: $input-font-size;
   }
 
   button {
@@ -192,10 +200,16 @@ body {
     margin: 5px;
     border-radius: 5px;
     border: 1px solid #777;
+    font-size: $input-font-size;
   }
 
   label[for="remember-login"] {
     font-size: 14px;
+    color: #222;
+  }
+
+  #remember-me-container {
+    margin-left: 2px;
   }
 
   #login-btns-container {
@@ -222,11 +236,6 @@ body {
 #habit-list {
   display: flex;
   flex-wrap: wrap;
-
-  .habit-card:nth-child(even) {
-    // margin-right: 3.5px;
-    // padding-right: 0px;
-  }
 
   .habit-card {
     position: relative;

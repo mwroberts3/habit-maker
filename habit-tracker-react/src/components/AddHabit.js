@@ -32,7 +32,7 @@ const AddHabit = ({serverUrl}) => {
 
         let token = localStorage.getItem('token')
 
-        fetch(`${serverUrl}/habits/add-habit`, {
+        fetch(`${serverUrl}/habits/add-habit/`, {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -64,7 +64,7 @@ const AddHabit = ({serverUrl}) => {
             <input name="daysLeft" type="number" required/>
             Days
           </div>
-          <Button btnDisplay='Submit' btnFunction='submitNewHabitBtn' functionLiteral={submitNewHabit} />
+          <Button btnDisplay='Submit' btnFunction='submitNewHabitBtn' functionLiteral={submitNewHabit} />&nbsp;
           <Button btnDisplay='Close' btnFunction='closeAddHabitForm' functionLiteral={closeAddHabitForm} />
         </form>
       </div>
