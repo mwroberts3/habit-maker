@@ -13,12 +13,11 @@ const HabitList = ({validLoginCheck, serverUrl}) => {
     
     let token = localStorage.getItem('token')
 
-    const habitDeletedCheck = () => {
-        setLoading(true)
+    const habitDeletedCheck = (e) => {
+        e.target.parentNode.parentNode.parentNode.classList.add('hidden');
     }
   
     if (loading) {
-        setLoading(false)
         fetch(`${serverUrl}/habits`, {
             method: 'GET',
             headers: {
@@ -35,6 +34,7 @@ const HabitList = ({validLoginCheck, serverUrl}) => {
 
                     history.go(0)
                 } else {
+                    setLoading(false)
                     setUserHabits(res.editedHabits)
                 }
             })
@@ -42,7 +42,8 @@ const HabitList = ({validLoginCheck, serverUrl}) => {
 
     return (
         <div id='habit-list'>
-            {
+            { loading && <div className="habit-list-loading">loading...</div>}
+            { !loading && 
             userHabits.length > 0 &&
                 userHabits.map((habit, index) => (
                 <HabitCard serverUrl={ serverUrl }key={ index } habit={ habit } habitDeletedCheck = { habitDeletedCheck } passedClass={ habit.updatedToday ? habit.active ? 'habit-card habit-logged-active' : 'habit-card habit-logged-passive' : 'habit-card'}/>

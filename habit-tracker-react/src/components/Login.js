@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { FaCubes } from 'react-icons/fa'
+import { FaBullseye } from 'react-icons/fa'
 
 let signUpConfirm = false
 
 const Login = ( {validLoginCheck, serverUrl} ) => {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [remember, setRemember] = useState(false)
+    const [loginText, setLoginText] = useState('Login')
     
     const [errMsg, setErrMsg] = useState('')
 
@@ -20,7 +21,7 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: email,
+                username: username,
                 password: password,
                 rememberMe: remember
             })
@@ -38,11 +39,22 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
         })
     }
 
+    const closeSignup = (e) => {
+        e.preventDefault()
+        document.getElementById('confirm-password-input').classList.add('hidden')
+
+        signUpConfirm = false
+
+        setLoginText('Login')
+    }
+
     const showConfirmPassword = (e) => {
         e.preventDefault()
         document.getElementById('confirm-password-input').classList.remove('hidden')
     
         signUpConfirm = true
+
+        setLoginText('Cancel')
     }
     
     const validateSignup = (e) => {
@@ -54,7 +66,7 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "email": email,
+                "username": username,
                 "password": password,
                 "confirmPassword": confirmPassword,
             })
@@ -71,23 +83,22 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
     }
 
     return (
-        <div id='login-container'>
         <div>
-            <h1 id="login-header">Habit Target <FaCubes className="header-icon" size={35}/></h1>&nbsp;
-        </div>
+        <h1 id="HT-header">Habit Target</h1> <FaBullseye className="header-icon" size={52}/>
+        <div id='login-container'>
         <p id='error-msg-display'>{errMsg !== '' ? `${errMsg}` : (<span>&nbsp;</span>)}</p>
         <form className="login" id="login-signup-form" name="login"> 
-            <input id="login-email" name="email" type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input id="login-email" name="username" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <input id="login-pw" name="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <input id='confirm-password-input' className='hidden' name="confirmPassword" type="password" placeholder="confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
             <div id='remember-me-container'>
-            <input id="store-session-checkbox" type="checkbox" value={remember} onChange={(e) => setRemember(e.target.checked)}/>
-            <label htmlFor="remember-login">Remember Me</label>
+                <input id="store-session-checkbox" type="checkbox" value={remember} onChange={(e) => setRemember(e.target.checked)}/>
+                <label htmlFor="remember-login">Remember Me</label>
             </div>
             <div id='login-btns-container'>
             <button id="login-submit" className="light-btn" onClick={(e) => {
-                validateLogin(e)
-            }}>Login</button>
+                loginText !== 'Cancel' ?validateLogin(e) : closeSignup(e)
+            }}>{loginText}</button>
             <button id="signup-submit" className="light-btn" onClick={(e) => { 
                 signUpConfirm ? 
                 validateSignup(e) :showConfirmPassword(e)                    
@@ -95,6 +106,7 @@ const Login = ( {validLoginCheck, serverUrl} ) => {
             </div>
         </form>
         </div>
+    </div>
     )
 }
 

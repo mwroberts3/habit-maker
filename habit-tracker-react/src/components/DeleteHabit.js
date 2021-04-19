@@ -1,7 +1,5 @@
-import {Redirect} from 'react-router-dom'
-
 const DeleteHabit = ({ habitDesc, habitDeletedCheck }) => {
-    const deleteHabitRequest = () => {
+    const deleteHabitRequest = (e) => {
         let token = localStorage.getItem('token')
 
         fetch(`https://habit-target-api.herokuapp.com/habits/delete-habit`, {
@@ -13,14 +11,13 @@ const DeleteHabit = ({ habitDesc, habitDeletedCheck }) => {
             body: JSON.stringify({ description: habitDesc })
         })
         .then(() => {
-            habitDeletedCheck()
-            return (<Redirect to='/' />)
+            habitDeletedCheck(e)
         })
     }
 
     return (
-        <div className='delete-habit-btn' onClick={() => {
-            deleteHabitRequest()
+        <div className='delete-habit-btn' onClick={(e) => {
+            deleteHabitRequest(e)
         }}>
             <span className='delete-btn-x'>x</span>
         </div>

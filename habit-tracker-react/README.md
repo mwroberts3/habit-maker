@@ -5,6 +5,8 @@
 **Release**: 4/19/21
 <br>
 **Creator**: mwroberts3
+<br>
+**Contact**: mwroberts89@gmail.com
 
 ## Purpose
 
@@ -16,5 +18,13 @@ Users select a habit name, a time period, and an amount of days within that time
 
 ## Future Updates
 
-- option to restart a particular habit after the time period runs out
-- collect statistics for users so they can see what habits they accomplished or failed at and maybe give an overall percentage of completed habits
+- **v1.1.0**
+
+  - option to restart a particular habit after the time period runs out
+
+- **v1.2.0**
+  - collect statistics for users so they can see what habits they accomplished or failed at and maybe give an overall percentage of completed habits
+
+## License
+
+MIT

@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
+
 $input-font-size: 17px;
 
 // Main styling
@@ -70,6 +72,7 @@ body {
   border-radius: 5px;
   font-weight: bold;
   color: #333;
+  font-size: 14px;
 }
 
 // Containers & inner elements
@@ -101,27 +104,50 @@ body {
   border: 3px solid #fff;
   border-radius: 5px;
 
-  #login-header {
-    color: #f7be26;
-    font-size: 45px;
-    margin-top: -5px;
-    margin-bottom: -12px;
-    text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666,
-      1px 1px 0 #666;
-
-    .header-icon {
-      color: #f0b515;
-    }
-  }
-
   #error-msg-display {
     color: #333;
-    margin: 0 0 10px;
+    margin: 5px 0 5px;
   }
+}
+
+#login-header {
+  color: #f7be26;
+  font-size: 45px;
+  margin-top: -5px;
+  margin-bottom: -12px;
+  text-shadow: -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333,
+    1px 1px 0 #333;
+}
+
+#HT-header {
+  width: 287px;
+  color: #f7be26;
+  font-family: "RocknRoll One", sans-serif;
+  font-size: 45px;
+  text-shadow: -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333,
+    1px 1px 0 #333;
+  top: 9px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 1;
+}
+
+.header-icon {
+  z-index: 0;
+  position: absolute;
+  left: 165px;
+  right: 0;
+  margin: auto;
+  top: 22px;
+  color: #f1dda5;
 }
 
 #login-container {
   width: 360px;
+  padding-bottom: 27px;
+  margin-top: 80px;
 }
 
 #about-container,
@@ -161,6 +187,7 @@ body {
 
   h3 {
     margin: 5px;
+    margin-bottom: 20px;
   }
 
   label {
@@ -168,10 +195,10 @@ body {
   }
 
   input[type="text"] {
-    width: 120px;
+    width: 200px;
     display: block;
     padding: 10px;
-    margin: 5px auto;
+    margin: 5px auto 20px;
     border-radius: 5px;
     border: 1px solid #777;
     font-size: $input-font-size;
@@ -179,16 +206,29 @@ body {
 
   input[type="number"] {
     width: 50px;
-    padding: 10px;
-    margin: 5px;
+    padding: 5px;
+    margin: 5px 5px 20px;
     border-radius: 5px;
     border: 1px solid #777;
     font-size: $input-font-size;
+    text-align: center;
   }
 
   button {
     width: 65px;
     margin: auto;
+  }
+
+  #update-style-input {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 42px;
+  }
+
+  #new-habit-goal {
+    label {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -259,23 +299,13 @@ body {
     }
 
     .delete-habit-btn {
-      // cursor: pointer;
-      // position: absolute;
-      // width: 15px;
-      // height: 15px;
-      // top: 2px;
-      // right: 3px;
-      // font-weight: bolder;
-      // border-radius: 50%;
-      // background: #fc3636;
-      // color: #fff;
-      // font-size: 12px;
-
       .delete-btn-x {
         position: absolute;
         top: -2px;
         right: 5px;
-        color: red;
+        color: #555;
+        font-size: 16px;
+        font-family: "RocknRoll One", sans-serif;
       }
     }
   }
@@ -286,5 +316,12 @@ body {
 
   .habit-logged-passive {
     background: rgb(255, 129, 129);
+  }
+
+  .habit-list-loading {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    padding-top: 50px;
   }
 }
