@@ -78,7 +78,7 @@ body {
 // Containers & inner elements
 .inner-contents {
   padding-top: 20px;
-  min-height: calc(100vh - 25px);
+  min-height: calc(100vh - 20px);
 }
 
 #total-container {
@@ -300,6 +300,7 @@ body {
 
     .delete-habit-btn {
       .delete-btn-x {
+        cursor: pointer;
         position: absolute;
         top: -2px;
         right: 5px;

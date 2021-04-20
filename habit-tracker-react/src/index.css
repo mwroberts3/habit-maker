@@ -55,7 +55,7 @@ body {
 
 .inner-contents {
   padding-top: 20px;
-  min-height: calc(100vh - 25px); }
+  min-height: calc(100vh - 20px); }
 
 #total-container {
   max-width: 1200px;
@@ -224,6 +224,7 @@ body {
     #habit-list .habit-card .active {
       color: green; }
     #habit-list .habit-card .delete-habit-btn .delete-btn-x {
+      cursor: pointer;
       position: absolute;
       top: -2px;
       right: 5px;

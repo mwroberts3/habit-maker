@@ -43,7 +43,6 @@ function App() {
           <Route exact path='/add-habit'>
             <AddHabit serverUrl={serverUrl} />
           </Route>
-          <Route path='/about' component={About} />
           <Route path='/how-to-use' component={HowToUse} />
         </div>
       </div>
@@ -60,7 +59,6 @@ function App() {
       <Route exact path='/'>
           <Login validLoginCheck={ validLoginCheck} serverUrl={serverUrl}/>
       </Route>
-      <Route path='/about' component={About} />
       <Route path='/how-to-use' component={HowToUse} />
       </div>
       <Footer />

@@ -7,8 +7,6 @@ const Footer = () => {
             <div id='footer-links'>
                 <span><Link to="/how-to-use">How to Use</Link></span>
                 <div className='footer-link-separator'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                <span><Link to="/about">About</Link></span>
-                <div className='footer-link-separator'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                 <a href="https://github.com/mwroberts3/habit-tracker" target="blank">
             <FaGithubAlt size={20} style={{marginRight: '5px'}}/>
             </a>

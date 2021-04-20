@@ -21,9 +21,25 @@ const HabitCard = ({ habit, habitDeletedCheck, passedClass, serverUrl }) => {
         })
         .then(() => {
             if (habit.active) {
-                e.target.parentNode.parentNode.classList.add('habit-logged-active')
+                if (e.target.tagName === 'SPAN' && !e.target.parentNode.parentNode.parentNode.classList.contains('habit-logged-active')) {
+                    e.target.parentNode.parentNode.parentNode.classList.add('habit-logged-active')
+
+                    e.target.parentNode.parentNode.children[2].innerHTML = `
+                    Goal: ${habit.daysLogged + 1} / ${habit.goal} <span style="color: #777; fontSize:14px">[${habit.daysLeft}]</span>
+                    `
+                } else if (e.target.tagName !== 'SPAN') {
+                    e.target.parentNode.parentNode.classList.add('habit-logged-active')
+
+                    e.target.parentNode.children[2].innerHTML = `
+                    Goal: ${habit.daysLogged + 1} / ${habit.goal} <span style="color: #777; fontSize:14px">[${habit.daysLeft}]</span>
+                    `
+                }
             } else {
-                e.target.parentNode.parentNode.classList.add('habit-logged-passive')
+                if (e.target.tagName !== 'SPAN'){ 
+                    e.target.parentNode.parentNode.classList.add('habit-logged-passive')
+                } else {
+                    e.target.parentNode.parentNode.parentNode.classList.add('habit-logged-passive')
+                }
             }
         })
     }
