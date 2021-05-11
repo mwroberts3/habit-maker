@@ -65,10 +65,11 @@ const HabitCard = ({ habit, habitDeletedCheck, passedClass, serverUrl }) => {
             }
             { habit.completed && 
             <div>
-                <p>{habit.description} Completed</p>
+                <p>Completed!</p>
+                <p>{habit.description}</p>
                 <p>{habit.daysLogged} / {habit.goal}</p>
                 {/* user should be able to click this to restart the habit from the beginning */}
-                <p>Reload Habit?</p>
+                {/* <p>Reload Habit?</p> */}
                 <DeleteHabit habitDesc={habit.description} habitDeletedCheck={ habitDeletedCheck }/>
             </div>
             }
